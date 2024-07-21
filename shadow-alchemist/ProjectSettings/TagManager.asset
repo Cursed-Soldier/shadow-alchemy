@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Player
+    uniqueID: 2322905229
+    locked: 0
+  - name: Stations
+    uniqueID: 3467699207
+    locked: 0
+  - name: Ground
+    uniqueID: 1781215093
+    locked: 0
