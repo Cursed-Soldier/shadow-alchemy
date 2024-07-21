@@ -20,5 +20,6 @@ public class TestDisplayItem : MonoBehaviour
     {
         item_name_ui.text = equipped_item.name;
         item_img_ui.sprite = equipped_item.icon;
+
     }
 }
