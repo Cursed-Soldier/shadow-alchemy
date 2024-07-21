@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c2ba2d9233caa441a990af04259ea1e, type: 3}
+  m_Name: Daffodil_Essence_Recipe
+  m_EditorClassIdentifier: 
+  recipe_name: Daffodil Essence Recipe
+  ingredients:
+  - {fileID: 11400000, guid: 2d86d62908d74134bb9230c68afcb17c, type: 2}
+  output: {fileID: 11400000, guid: 25c9402da8bd26b4a85e815c7f7d9e94, type: 2}

@@ -8,6 +8,7 @@ public class Item : ScriptableObject
     public string itemName;
     public Sprite icon;
 
+    public ItemType type;
     public bool stackable;
 
     public float default_price;
@@ -16,3 +17,16 @@ public class Item : ScriptableObject
     public float sell_price;
 
 }
+
+public enum ItemType 
+{ 
+    Flower,
+    Spice,
+    Essence,
+    Stone,
+    Metal,
+    Bowl,
+    Vial,
+    Potion
+}
+
