@@ -4,19 +4,31 @@ using UnityEngine;
 
 public class Recipes : MonoBehaviour
 {
-    public Recipe[] dissolver_recipes;
-    public Recipe[] separator_recipes;
-    public Recipe[] crucible_recipes;
+    public Recipe[] dissolverRecipes;
+    public Recipe[] separatorRecipes;
+    public Recipe[] crucibleRecipes;
 
-    public Recipe CheckDissolverRecipe(Item ingredient)
+    public Recipe CheckBasicRecipe(Item ingredient, Stations station)
     {
-
-        //ONLY WORKS FOR DISSOLVER
-        for (int i = 0; i < dissolver_recipes.Length; i++)
+        Recipe[] stationRecipes;
+        if (station == Stations.Dissolver)
         {
-            Debug.Log(dissolver_recipes[i].name);
-            if (ingredient.name.Equals(dissolver_recipes[i].ingredients[0].name)){
-                return dissolver_recipes[i];
+            stationRecipes = dissolverRecipes;
+        }
+        else if (station == Stations.Separator)
+        {
+            stationRecipes = separatorRecipes;
+        }
+        else
+        {
+            stationRecipes = crucibleRecipes;
+        }
+        
+        for (int i = 0; i < stationRecipes.Length; i++)
+        {
+            Debug.Log(stationRecipes[i].name);
+            if (ingredient.name.Equals(stationRecipes[i].ingredients[0].name)){
+                return stationRecipes[i];
             }
         }
         

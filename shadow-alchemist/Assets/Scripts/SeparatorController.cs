@@ -1,29 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class DissolverController : MonoBehaviour
+public class SeparatorController : MonoBehaviour
 {
-    public float timeToDissolve = 5.0f;
+    public float timeToSeparate = 5.0f;
 
     //UI
     public GameObject outputIcon;
     public GameObject outputBubble;
     public GameObject gameManager;
 
-    public bool dissolving = false;
+    public bool separating = false;
 
     public bool outputWaiting = false;
     public Item output = null;
+    public int outputAmount;
 
     public Item testItem;
 
     private void Start()
     {
         gameManager = GameObject.Find("GameManager");
+        //Testing
+        Separate(testItem);
 
-        
     }
 
     private void Update()
@@ -31,25 +32,27 @@ public class DissolverController : MonoBehaviour
         if (outputWaiting)
         {
             outputIcon.GetComponent<SpriteRenderer>().sprite = output.icon;
-            outputWaiting = false;
+            
         }
     }
 
-    public void Dissolve(Item input_item)
+    public void Separate(Item input_item)
     {
-        if(input_item.type == ItemType.Flower || input_item.type == ItemType.Stone || input_item.type == ItemType.Metal)
+        
+
+        if (input_item.type == ItemType.Bowl | input_item.type == ItemType.Essence)
         {
-            //Look for item in dissolver recipes
-            Recipe foundRecipe = gameManager.GetComponent<Recipes>().CheckBasicRecipe(input_item,Stations.Dissolver);
+            //Look for item in separator recipes
+            Recipe foundRecipe = gameManager.GetComponent<Recipes>().CheckBasicRecipe(input_item, Stations.Separator);
             //If recipe found for item
             if (foundRecipe != null)
             {
                 //Start machine 
-                Debug.Log("DISSOLVING");
-                if (!dissolving)
+                Debug.Log("SEPARATING");
+                if (!separating)
                 {
-                    StartCoroutine(DissolveCoroutine(foundRecipe));
-                    
+                    StartCoroutine(SeparateCoroutine(foundRecipe));
+
                 }
                 //After time has passed output item
             }
@@ -59,15 +62,17 @@ public class DissolverController : MonoBehaviour
             }
 
         }
-    } 
+    }
 
-    public IEnumerator DissolveCoroutine(Recipe recipe)
+    public IEnumerator SeparateCoroutine(Recipe recipe)
     {
-        dissolving = true;
-        yield return new WaitForSeconds(timeToDissolve);
-        Debug.Log("DISSOLVED");
+        separating = true;
+        yield return new WaitForSeconds(timeToSeparate);
+        Debug.Log("SEPARATED");
+        outputAmount =  Random.Range(2, 4);
+        Debug.Log(outputAmount);
         output = recipe.output;
         outputWaiting = true;
-        dissolving = false;
+        separating = false;
     }
 }
