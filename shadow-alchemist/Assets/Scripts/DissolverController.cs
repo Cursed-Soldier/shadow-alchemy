@@ -21,7 +21,7 @@ public class DissolverController : MonoBehaviour
 
     private void Start()
     {
-        gameManager = GameObject.Find("GameManager");
+        gameManager = GameObject.Find("RecipeManager");
         //Dissolve(testItem);
     }
 

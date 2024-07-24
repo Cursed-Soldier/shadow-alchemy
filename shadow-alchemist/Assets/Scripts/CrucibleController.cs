@@ -30,7 +30,7 @@ public class CrucibleController : MonoBehaviour
 
     private void Start()
     {
-        gameManager = GameObject.Find("GameManager");
+        gameManager = GameObject.Find("RecipeManager");
         itemsInCrucible = new Item[3];
         metals = gameManager.GetComponent<Recipes>().metals;
         //Testing
