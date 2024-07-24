@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Recipes : MonoBehaviour
 {
@@ -8,7 +9,9 @@ public class Recipes : MonoBehaviour
     public Recipe[] separatorRecipes;
     public Recipe[] crucibleRecipes;
 
-    public Recipe CheckBasicRecipe(Item ingredient, Stations station)
+    public Item[] metals;
+
+    public Recipe CheckBasicRecipe(Item[] ingredients, Stations station)
     {
         Recipe[] stationRecipes;
         if (station == Stations.Dissolver)
@@ -27,13 +30,21 @@ public class Recipes : MonoBehaviour
         for (int i = 0; i < stationRecipes.Length; i++)
         {
             Debug.Log(stationRecipes[i].name);
-            if (ingredient.name.Equals(stationRecipes[i].ingredients[0].name)){
-                return stationRecipes[i];
+            for (int j = 0; j < ingredients.Length; j++)
+            {
+                
+               if (stationRecipes[i].ingredients.All(item => ingredients.Contains(item)))
+               {
+                    return stationRecipes[i];
+               }
             }
+            
         }
         
         return null;
     }
+
+ 
 
 }
 

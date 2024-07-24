@@ -22,8 +22,8 @@ public class SeparatorController : MonoBehaviour
     private void Start()
     {
         gameManager = GameObject.Find("GameManager");
-        //Testing
-        Separate(testItem);
+        //Separate(testItem);
+   
 
     }
 
@@ -42,8 +42,9 @@ public class SeparatorController : MonoBehaviour
 
         if (input_item.type == ItemType.Bowl | input_item.type == ItemType.Essence)
         {
+            Item[] ingredient = { input_item };
             //Look for item in separator recipes
-            Recipe foundRecipe = gameManager.GetComponent<Recipes>().CheckBasicRecipe(input_item, Stations.Separator);
+            Recipe foundRecipe = gameManager.GetComponent<Recipes>().CheckBasicRecipe(ingredient, Stations.Separator);
             //If recipe found for item
             if (foundRecipe != null)
             {
