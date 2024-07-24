@@ -21,7 +21,7 @@ public class SeparatorController : MonoBehaviour
 
     private void Start()
     {
-        gameManager = GameObject.Find("GameManager");
+        gameManager = GameObject.Find("RecipeManager");
         //Separate(testItem);
    
 
