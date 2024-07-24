@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c2ba2d9233caa441a990af04259ea1e, type: 3}
+  m_Name: Healing_Elixir_Recipe
+  m_EditorClassIdentifier: 
+  recipe_name: Healing Elixir Recipe
+  ingredients:
+  - {fileID: 11400000, guid: 3648e88d656295646b9b12584a289195, type: 2}
+  - {fileID: 11400000, guid: 2b49d7344b3bf4c489924af836932899, type: 2}
+  - {fileID: 11400000, guid: 5507aacb3a3a2b0469e57e98537b7ac1, type: 2}
+  output: {fileID: 11400000, guid: c7ebbdac9c4aef149b99a37bb3d60d66, type: 2}
