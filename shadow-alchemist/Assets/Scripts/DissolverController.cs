@@ -36,10 +36,11 @@ public class DissolverController : MonoBehaviour
 
     public void Dissolve(Item input_item)
     {
-        if(input_item.type == ItemType.Flower || input_item.type == ItemType.Stone || input_item.type == ItemType.Metal)
+        Item[] ingredient = { input_item };
+        if (input_item.type == ItemType.Flower || input_item.type == ItemType.Stone || input_item.type == ItemType.Metal)
         {
             //Look for item in dissolver recipes
-            Recipe foundRecipe = gameManager.GetComponent<Recipes>().CheckDissolverRecipe(input_item);
+            Recipe foundRecipe = gameManager.GetComponent<Recipes>().CheckBasicRecipe(ingredient,Stations.Dissolver);
             //If recipe found for item
             if (foundRecipe != null)
             {
