@@ -1,50 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class Recipes : MonoBehaviour
 {
-    public Recipe[] dissolverRecipes;
-    public Recipe[] separatorRecipes;
-    public Recipe[] crucibleRecipes;
+    public Recipe[] dissolver_recipes;
+    public Recipe[] separator_recipes;
+    public Recipe[] crucible_recipes;
 
-    public Item[] metals;
-
-    public Recipe CheckBasicRecipe(Item[] ingredients, Stations station)
+    public Recipe CheckDissolverRecipe(Item ingredient)
     {
-        Recipe[] stationRecipes;
-        if (station == Stations.Dissolver)
+
+        //ONLY WORKS FOR DISSOLVER
+        for (int i = 0; i < dissolver_recipes.Length; i++)
         {
-            stationRecipes = dissolverRecipes;
-        }
-        else if (station == Stations.Separator)
-        {
-            stationRecipes = separatorRecipes;
-        }
-        else
-        {
-            stationRecipes = crucibleRecipes;
-        }
-        
-        for (int i = 0; i < stationRecipes.Length; i++)
-        {
-            Debug.Log(stationRecipes[i].name);
-            for (int j = 0; j < ingredients.Length; j++)
-            {
-                
-               if (stationRecipes[i].ingredients.All(item => ingredients.Contains(item)))
-               {
-                    return stationRecipes[i];
-               }
+            Debug.Log(dissolver_recipes[i].name);
+            if (ingredient.name.Equals(dissolver_recipes[i].ingredients[0].name)){
+                return dissolver_recipes[i];
             }
-            
         }
         
         return null;
     }
-
- 
 
 }
 

@@ -22,7 +22,9 @@ public class DissolverController : MonoBehaviour
     private void Start()
     {
         gameManager = GameObject.Find("GameManager");
-        //Dissolve(testItem);
+        //Testing
+        Dissolve(testItem);
+        
     }
 
     private void Update()
@@ -36,11 +38,10 @@ public class DissolverController : MonoBehaviour
 
     public void Dissolve(Item input_item)
     {
-        Item[] ingredient = { input_item };
-        if (input_item.type == ItemType.Flower || input_item.type == ItemType.Stone || input_item.type == ItemType.Metal)
+        if(input_item.type == ItemType.Flower || input_item.type == ItemType.Stone || input_item.type == ItemType.Metal)
         {
             //Look for item in dissolver recipes
-            Recipe foundRecipe = gameManager.GetComponent<Recipes>().CheckBasicRecipe(ingredient,Stations.Dissolver);
+            Recipe foundRecipe = gameManager.GetComponent<Recipes>().CheckDissolverRecipe(input_item);
             //If recipe found for item
             if (foundRecipe != null)
             {
