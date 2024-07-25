@@ -53,12 +53,8 @@ public class InventoryManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
-            UseItem(testItem, index);
-            UpdateToolbarUI();
-        }
-        else if (Input.GetKeyDown(KeyCode.V))
-        {
-            UseItem(testItem2, index);
+            Item a = UseItem(0);
+            Debug.Log(a.name);
             UpdateToolbarUI();
         }
     }
@@ -83,7 +79,7 @@ public class InventoryManager : MonoBehaviour
     }
 
 
-    public bool AddItem(Item item)
+    public Item AddItem(Item item)
     {
         //Check if item already exists
         for (int i = 0; i < itemSlots.Length; i++)
@@ -94,7 +90,7 @@ public class InventoryManager : MonoBehaviour
                 if(itemSlots[i].slotAmount < stackLimit)
                 {
                     itemSlots[i].slotAmount++;
-                    return true;
+                    return itemSlots[i].slotItem;
                 }
             }
         }
@@ -106,21 +102,22 @@ public class InventoryManager : MonoBehaviour
             {
                 itemSlots[j].slotItem = item;
                 itemSlots[j].slotAmount = 1;
-                return true;
+                return itemSlots[j].slotItem;
             }
         }
 
-        return false;
+        return null;
     }
 
-    public bool UseItem(Item item, int index)
+    public Item UseItem(int index)
     {
         for (int i = 0; i < itemSlots.Length; i++)
         {
             //If item in index specified and exists
-            if (itemSlots[i].slotItem == item && i == index)
+            if (itemSlots[i].slotItem != null && i == index)
             {
                 itemSlots[i].slotAmount--;
+                Item output = itemSlots[i].slotItem;
                 //If items run out, reset slot
                 if(itemSlots[i].slotAmount < 1)
                 {
@@ -128,12 +125,12 @@ public class InventoryManager : MonoBehaviour
                     itemSlots[i].slotItem = null;
                     itemSlots[i].slotAmount = 0;
                 }
-                return true;
+                return output;
 
 
             }
         }
-        return false;
+        return null;
     }
 
     public void UpdateToolbarUI()

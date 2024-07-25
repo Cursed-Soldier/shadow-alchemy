@@ -22,7 +22,6 @@ public class DissolverController : MonoBehaviour
     private void Start()
     {
         gameManager = GameObject.Find("RecipeManager");
-        //Dissolve(testItem);
     }
 
     private void Update()
@@ -36,28 +35,31 @@ public class DissolverController : MonoBehaviour
 
     public void Dissolve(Item input_item)
     {
-        Item[] ingredient = { input_item };
-        if (input_item.type == ItemType.Flower || input_item.type == ItemType.Stone || input_item.type == ItemType.Metal)
+        if (!outputWaiting || !dissolving)
         {
-            //Look for item in dissolver recipes
-            Recipe foundRecipe = gameManager.GetComponent<Recipes>().CheckBasicRecipe(ingredient,Stations.Dissolver);
-            //If recipe found for item
-            if (foundRecipe != null)
+            Item[] ingredient = { input_item };
+            if (input_item.type == ItemType.Flower || input_item.type == ItemType.Stone || input_item.type == ItemType.Metal)
             {
-                //Start machine 
-                Debug.Log("DISSOLVING");
-                if (!dissolving)
+                //Look for item in dissolver recipes
+                Recipe foundRecipe = gameManager.GetComponent<Recipes>().CheckBasicRecipe(ingredient, Stations.Dissolver);
+                //If recipe found for item
+                if (foundRecipe != null)
                 {
-                    StartCoroutine(DissolveCoroutine(foundRecipe));
-                    
-                }
-                //After time has passed output item
-            }
-            else
-            {
-                Debug.Log("NO RECIPE");
-            }
+                    //Start machine 
+                    Debug.Log("DISSOLVING");
+                    if (!dissolving)
+                    {
+                        StartCoroutine(DissolveCoroutine(foundRecipe));
 
+                    }
+                    //After time has passed output item
+                }
+                else
+                {
+                    Debug.Log("NO RECIPE");
+                }
+
+            }
         }
     } 
 

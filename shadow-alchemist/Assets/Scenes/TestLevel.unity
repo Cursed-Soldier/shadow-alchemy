@@ -1391,6 +1391,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxIndex: 8
   scrollIndex: 0
+  canInteract: 1
+  interactType: 2
+  invManager: {fileID: 596181778}
+  dissolver: {fileID: 456142101}
+  separator: {fileID: 758023380}
+  crucible: {fileID: 668418032}
   moveSpeed: 10
 --- !u!50 &596181777
 Rigidbody2D:
@@ -1446,8 +1452,8 @@ MonoBehaviour:
   index: 0
   slotColor: {r: 0.22352941, g: 0.12156863, b: 0.12941177, a: 1}
   highlightColor: {r: 1, g: 0.63529414, b: 0.078431375, a: 1}
-  testItem: {fileID: 11400000, guid: 2b49d7344b3bf4c489924af836932899, type: 2}
-  testItem2: {fileID: 11400000, guid: a4bb7edf3d5da8d46b1906e06c260838, type: 2}
+  testItem: {fileID: 11400000, guid: 28319b9ea51640140a6724e626749643, type: 2}
+  testItem2: {fileID: 11400000, guid: 93c06e41e07294444af0ec46138f41a3, type: 2}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0

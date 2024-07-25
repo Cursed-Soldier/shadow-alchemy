@@ -12,6 +12,14 @@ public class PlayerMovement : MonoBehaviour
     public int maxIndex = 8;
     public int scrollIndex;
 
+    public bool canInteract;
+    public InteractType interactType;
+
+    public InventoryManager invManager;
+    public DissolverController dissolver;
+    public SeparatorController separator;
+    public CrucibleController crucible;
+
 
     public float moveSpeed = 10f;
 
@@ -37,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
         input.Player.Movement.performed += OnMovementPerformed;
         input.Player.Movement.canceled += OnMovementCancelled;
         input.Player.Scroll.performed += OnScroll;
+        input.Player.Interact.performed += OnInteract;
 
     }
 
@@ -49,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
         input.Player.Movement.performed -= OnMovementPerformed;
         input.Player.Movement.canceled -= OnMovementCancelled;
         input.Player.Scroll.performed -= OnScroll;
+        input.Player.Interact.performed -= OnInteract;
     }
 
 
@@ -93,5 +103,36 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnInteract(InputAction.CallbackContext value)
+    {
+        if (canInteract)
+        {
+            if (interactType == InteractType.Dissolver)
+            {
+                Item usedItem = invManager.UseItem(0);
+                invManager.UpdateToolbarUI();
+                dissolver.Dissolve(usedItem);
+            }
+            else if (interactType == InteractType.Separator)
+            {
+                Item usedItem = invManager.UseItem(0);
+                invManager.UpdateToolbarUI();
+                separator.Separate(usedItem);
+            }
+        }
+    }
+
 }
+
+public enum InteractType 
+{
+    None,
+    Dissolver,
+    Separator,
+    Crucible,
+    Shop,
+    Export,
+    Table
+}
+
 
