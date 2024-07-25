@@ -39,7 +39,7 @@ public class CrucibleController : MonoBehaviour
         itemsInCrucible[2] = testItem3;
         metalLining = testItem4;
 
-        Mix(itemsInCrucible);
+        //Mix(itemsInCrucible);
 
     }
 

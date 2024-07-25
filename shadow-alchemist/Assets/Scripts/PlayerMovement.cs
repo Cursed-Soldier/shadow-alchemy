@@ -9,6 +9,10 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveVector = Vector2.zero;
     private Rigidbody2D rb = null;
 
+    public int maxIndex = 8;
+    public int scrollIndex;
+
+
     public float moveSpeed = 10f;
 
     private void Awake()
@@ -29,9 +33,10 @@ public class PlayerMovement : MonoBehaviour
 
         input.Player.Enable();
         
-        //Enable combat functions
+        //Enable functions
         input.Player.Movement.performed += OnMovementPerformed;
         input.Player.Movement.canceled += OnMovementCancelled;
+        input.Player.Scroll.performed += OnScroll;
 
     }
 
@@ -39,10 +44,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
 
-        //Disable combat functions
+        //Disable functions
         input.Player.Disable();
         input.Player.Movement.performed -= OnMovementPerformed;
         input.Player.Movement.canceled -= OnMovementCancelled;
+        input.Player.Scroll.performed -= OnScroll;
     }
 
 
@@ -59,6 +65,32 @@ public class PlayerMovement : MonoBehaviour
     private void OnMovementCancelled(InputAction.CallbackContext value)
     {
         moveVector = Vector2.zero;
+    }
+
+    private void OnScroll(InputAction.CallbackContext value)
+    {
+        Vector2 scrollVector = value.ReadValue<Vector2>();
+        float scroll = scrollVector.y;
+
+        if (scroll > 0f)
+        {
+            //Scrolling upwards
+            scrollIndex++;
+            if (scrollIndex >= maxIndex)
+            {
+                scrollIndex = 0;
+            }
+        }
+        else if (scroll < 0f)
+        {
+            // Scroll downwards
+            scrollIndex--;
+            if (scrollIndex < 0)
+            {
+                scrollIndex = maxIndex - 1;
+            }
+
+        }
     }
 
 }
