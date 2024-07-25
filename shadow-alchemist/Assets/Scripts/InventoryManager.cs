@@ -2,52 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
+using TMPro;
+
 
 public class InventoryManager : MonoBehaviour
 {
+    public PlayerMovement playerMove;
     public Slot[] itemSlots;
 
     public int stackLimit;
     public GameObject[] slots;
+
     public int index;
+    public Color slotColor;
+    public Color highlightColor;
 
     public Item testItem;
     public Item testItem2;
 
+
     private void Start()
     {
+        //playerMove = gameObject.GetComponent<PlayerMovement>();
         itemSlots = new Slot[9];
         for (int i = 0; i < itemSlots.Length; i++)
         {
             itemSlots[i] = new Slot(i, null, 0);
         }
-        ShowInventory();
+
     }
 
     private void Update()
     {
+        if(index != playerMove.scrollIndex)
+        {
+            //Update UI
+            UpdateToolbarScroll();
+        }
+
         if (Input.GetKeyDown(KeyCode.Z))
         {
             AddItem(testItem);
-            ShowInventory();
+            UpdateToolbarUI();
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
             AddItem(testItem2);
-            ShowInventory();
+            UpdateToolbarUI();
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
             UseItem(testItem, index);
-            ShowInventory();
+            UpdateToolbarUI();
         }
         else if (Input.GetKeyDown(KeyCode.V))
         {
             UseItem(testItem2, index);
-            ShowInventory();
+            UpdateToolbarUI();
         }
     }
 
+    /// <summary>
+    /// Testing script used to see inventory items in console
+    /// </summary>
     public void ShowInventory()
     {
         foreach (Slot slot in itemSlots)
@@ -117,7 +135,58 @@ public class InventoryManager : MonoBehaviour
         }
         return false;
     }
-    
+
+    public void UpdateToolbarUI()
+    {
+        for (int i = 0; i < itemSlots.Length; i++)
+        {
+
+            if (itemSlots[i].slotItem == null)
+            {
+                slots[i].transform.Find("Icon").GetComponent<Image>().sprite = null;
+                slots[i].transform.Find("AmountText").GetComponent<TextMeshProUGUI>().text = "";
+                //Set opacity to 0
+                Color opacity = slots[i].transform.Find("Icon").GetComponent<Image>().color;
+                opacity.a = 0f;
+                slots[i].transform.Find("Icon").GetComponent<Image>().color = opacity;
+
+            }
+            else
+            {
+                //Set opacity to 1
+                Color opacity = slots[i].transform.Find("Icon").GetComponent<Image>().color;
+                opacity.a = 1f;
+                slots[i].transform.Find("Icon").GetComponent<Image>().color = opacity;
+
+                // Check if there is more than 1 item in the slot
+                if (itemSlots[i].slotAmount > 1)
+                {
+                    slots[i].transform.Find("AmountText").GetComponent<TextMeshProUGUI>().text = itemSlots[i].slotAmount.ToString();
+                }
+                else
+                {
+                    slots[i].transform.Find("AmountText").GetComponent<TextMeshProUGUI>().text = "";
+                }
+
+                slots[i].transform.Find("Icon").GetComponent<Image>().sprite = itemSlots[i].slotItem.icon;
+
+            }
+        }
+    }
+
+    public void UpdateToolbarScroll()
+    {
+        Color prevIndexColor = slots[index].gameObject.GetComponent<Image>().color;
+        prevIndexColor = slotColor;
+        slots[index].gameObject.GetComponent<Image>().color = prevIndexColor;
+
+        index = playerMove.scrollIndex;
+
+        Color newIndexColor = slots[index].gameObject.GetComponent<Image>().color;
+        newIndexColor = highlightColor;
+        slots[index].gameObject.GetComponent<Image>().color = newIndexColor;
+    }
+
 }
 
 public class Slot
