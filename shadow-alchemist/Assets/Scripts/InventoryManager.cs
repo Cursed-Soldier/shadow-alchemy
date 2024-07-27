@@ -151,6 +151,19 @@ public class InventoryManager : MonoBehaviour
         return false;
     }
 
+    public bool FreeSlot()
+    {
+        for (int j = 0; j < itemSlots.Length; j++)
+        {
+            //If empty slot
+            if (itemSlots[j].slotAmount == 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Item UseItem()
     {
         if (itemSlots[index].slotAmount != 0)

@@ -218,6 +218,79 @@ public class PlayerMovement : MonoBehaviour
                         }
                         break;
                     case InteractType.Crucible:
+                        if (invManager.EmptySlot())
+                        {
+                            //Collect item if possible
+                            Item collectedItem = crucible.CollectItem();
+                            if (collectedItem == null)
+                            {
+                                Debug.Log("No item to collect");
+                                //Check if there is a free slot
+                                if (invManager.FreeSlot())
+                                {
+                                    //Check if we can remove item from crucible
+                                    Item crucibleItem = crucible.RemoveFromCrucible();
+                                    if (crucibleItem == null)
+                                    {
+                                        Debug.Log("Not possible to remove item");
+                                    }
+                                    else
+                                    {
+                                        Debug.Log("Item returned");
+                                        Item added = invManager.AddItem(crucibleItem);
+                                        if (added == null)
+                                        {
+                                            Debug.Log("not added");
+                                        }
+                                        else
+                                        {
+                                            Debug.Log("added");
+                                            invManager.UpdateToolbarUI();
+
+                                        }
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                Item added = invManager.AddItem(collectedItem);
+                                if (added == null)
+                                {
+                                    Debug.Log("not added");
+                                }
+                                else
+                                {
+                                    Debug.Log("added");
+                                    invManager.UpdateToolbarUI();
+
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            //If item of correct type or not null
+                            if (invManager.CheckItem(Stations.Crucible))
+                            {
+                                //If separator currently not working or has an output
+                                if (!crucible.mixing && !crucible.outputWaiting)
+                                {
+                                   
+                                    if (crucible.FreeCrucibleSpot())
+                                    {
+                                        Item usedItem = invManager.UseItem();
+                                        invManager.UpdateToolbarUI();
+                                        crucible.AddToCrucible(usedItem);
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                Debug.Log("Cannot mix item");
+                            }
+                        }
                         break;
                     case InteractType.Shop:
                         break;
