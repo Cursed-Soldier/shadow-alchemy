@@ -28,8 +28,12 @@ public class DissolverController : MonoBehaviour
     {
         if (outputWaiting)
         {
-            outputIcon.GetComponent<SpriteRenderer>().sprite = output.icon;
-            outputWaiting = false;
+            if (!outputBubble.activeInHierarchy)
+            {
+                outputIcon.GetComponent<SpriteRenderer>().sprite = output.icon;
+                outputIcon.SetActive(true);
+                outputBubble.SetActive(true);
+            }
         }
     }
 
@@ -46,9 +50,10 @@ public class DissolverController : MonoBehaviour
                 if (foundRecipe != null)
                 {
                     //Start machine 
-                    Debug.Log("DISSOLVING");
+                    
                     if (!dissolving)
                     {
+                        Debug.Log("DISSOLVING");
                         StartCoroutine(DissolveCoroutine(foundRecipe));
 
                     }
@@ -61,7 +66,22 @@ public class DissolverController : MonoBehaviour
 
             }
         }
-    } 
+    }
+    
+    public Item CollectItem()
+    {
+        Item ret = output;
+        if (outputWaiting)
+        {
+            outputWaiting = false;
+            output = null;
+            outputIcon.GetComponent<SpriteRenderer>().sprite = null;
+            outputIcon.SetActive(false);
+            outputBubble.SetActive(false);
+        }
+        return ret;
+
+    }
 
     public IEnumerator DissolveCoroutine(Recipe recipe)
     {

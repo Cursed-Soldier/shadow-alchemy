@@ -30,6 +30,7 @@ public class InventoryManager : MonoBehaviour
         {
             itemSlots[i] = new Slot(i, null, 0);
         }
+        UpdateToolbarScroll();
 
     }
 
@@ -53,7 +54,7 @@ public class InventoryManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
-            Item a = UseItem(0);
+            Item a = UseItem();
             Debug.Log(a.name);
             UpdateToolbarUI();
         }
@@ -109,26 +110,75 @@ public class InventoryManager : MonoBehaviour
         return null;
     }
 
-    public Item UseItem(int index)
+    public bool CheckItem(Stations station)
     {
-        for (int i = 0; i < itemSlots.Length; i++)
+        Item input_item = itemSlots[index].slotItem;
+        if (input_item != null)
         {
-            //If item in index specified and exists
-            if (itemSlots[i].slotItem != null && i == index)
+            switch (station)
             {
-                itemSlots[i].slotAmount--;
-                Item output = itemSlots[i].slotItem;
-                //If items run out, reset slot
-                if(itemSlots[i].slotAmount < 1)
-                {
-                    itemSlots[i].slotIndex = i;
-                    itemSlots[i].slotItem = null;
-                    itemSlots[i].slotAmount = 0;
-                }
-                return output;
-
-
+                case Stations.Dissolver:
+                    if (input_item.type == ItemType.Flower || input_item.type == ItemType.Stone || input_item.type == ItemType.Metal)
+                    {
+                        return true;
+                    }
+                    break;
+                case Stations.Separator:
+                    if (input_item.type == ItemType.Bowl | input_item.type == ItemType.Essence)
+                    {
+                        return true;
+                    }
+                    break;
+                case Stations.Crucible:
+                    if (input_item.type == ItemType.Vial || input_item.type == ItemType.Spice || input_item.type == ItemType.Essence)
+                    {
+                        return true;
+                    }
+                    break;
+                default:
+                    break;
             }
+        }
+        return false;
+    }
+
+    public bool EmptySlot()
+    {
+        if (itemSlots[index].slotAmount == 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public Item UseItem()
+    {
+        if (itemSlots[index].slotAmount != 0)
+        {
+            for (int i = 0; i < itemSlots.Length; i++)
+            {
+                //If item in index specified and exists
+                if (itemSlots[i].slotItem != null && i == index)
+                {
+                    Debug.Log(itemSlots[i].slotItem.name);
+                    itemSlots[i].slotAmount--;
+                    Item output = itemSlots[i].slotItem;
+                    //If items run out, reset slot
+                    if (itemSlots[i].slotAmount < 1)
+                    {
+                        itemSlots[i].slotIndex = i;
+                        itemSlots[i].slotItem = null;
+                        itemSlots[i].slotAmount = 0;
+                    }
+                    return output;
+
+
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("No item selected to use");
         }
         return null;
     }
