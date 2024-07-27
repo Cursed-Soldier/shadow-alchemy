@@ -31,8 +31,12 @@ public class SeparatorController : MonoBehaviour
     {
         if (outputWaiting)
         {
-            outputIcon.GetComponent<SpriteRenderer>().sprite = output.icon;
-            
+            if (!outputBubble.activeInHierarchy)
+            {
+                outputIcon.GetComponent<SpriteRenderer>().sprite = output.icon;
+                outputIcon.SetActive(true);
+                outputBubble.SetActive(true);
+            }
         }
     }
 
@@ -63,6 +67,21 @@ public class SeparatorController : MonoBehaviour
             }
 
         }
+    }
+
+    public Item CollectItem()
+    {
+        Item ret = output;
+        if (outputWaiting)
+        {
+            outputWaiting = false;
+            output = null;
+            outputIcon.GetComponent<SpriteRenderer>().sprite = null;
+            outputIcon.SetActive(false);
+            outputBubble.SetActive(false);
+        }
+        return ret;
+
     }
 
     public IEnumerator SeparateCoroutine(Recipe recipe)

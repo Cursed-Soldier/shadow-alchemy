@@ -22,44 +22,66 @@ public class DissolverController : MonoBehaviour
     private void Start()
     {
         gameManager = GameObject.Find("RecipeManager");
-        //Dissolve(testItem);
     }
 
     private void Update()
     {
         if (outputWaiting)
         {
-            outputIcon.GetComponent<SpriteRenderer>().sprite = output.icon;
-            outputWaiting = false;
+            if (!outputBubble.activeInHierarchy)
+            {
+                outputIcon.GetComponent<SpriteRenderer>().sprite = output.icon;
+                outputIcon.SetActive(true);
+                outputBubble.SetActive(true);
+            }
         }
     }
 
     public void Dissolve(Item input_item)
     {
-        Item[] ingredient = { input_item };
-        if (input_item.type == ItemType.Flower || input_item.type == ItemType.Stone || input_item.type == ItemType.Metal)
+        if (!outputWaiting || !dissolving)
         {
-            //Look for item in dissolver recipes
-            Recipe foundRecipe = gameManager.GetComponent<Recipes>().CheckBasicRecipe(ingredient,Stations.Dissolver);
-            //If recipe found for item
-            if (foundRecipe != null)
+            Item[] ingredient = { input_item };
+            if (input_item.type == ItemType.Flower || input_item.type == ItemType.Stone || input_item.type == ItemType.Metal)
             {
-                //Start machine 
-                Debug.Log("DISSOLVING");
-                if (!dissolving)
+                //Look for item in dissolver recipes
+                Recipe foundRecipe = gameManager.GetComponent<Recipes>().CheckBasicRecipe(ingredient, Stations.Dissolver);
+                //If recipe found for item
+                if (foundRecipe != null)
                 {
-                    StartCoroutine(DissolveCoroutine(foundRecipe));
+                    //Start machine 
                     
-                }
-                //After time has passed output item
-            }
-            else
-            {
-                Debug.Log("NO RECIPE");
-            }
+                    if (!dissolving)
+                    {
+                        Debug.Log("DISSOLVING");
+                        StartCoroutine(DissolveCoroutine(foundRecipe));
 
+                    }
+                    //After time has passed output item
+                }
+                else
+                {
+                    Debug.Log("NO RECIPE");
+                }
+
+            }
         }
-    } 
+    }
+    
+    public Item CollectItem()
+    {
+        Item ret = output;
+        if (outputWaiting)
+        {
+            outputWaiting = false;
+            output = null;
+            outputIcon.GetComponent<SpriteRenderer>().sprite = null;
+            outputIcon.SetActive(false);
+            outputBubble.SetActive(false);
+        }
+        return ret;
+
+    }
 
     public IEnumerator DissolveCoroutine(Recipe recipe)
     {

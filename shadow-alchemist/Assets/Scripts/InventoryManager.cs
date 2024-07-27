@@ -30,6 +30,7 @@ public class InventoryManager : MonoBehaviour
         {
             itemSlots[i] = new Slot(i, null, 0);
         }
+        UpdateToolbarScroll();
 
     }
 
@@ -53,12 +54,8 @@ public class InventoryManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
-            UseItem(testItem, index);
-            UpdateToolbarUI();
-        }
-        else if (Input.GetKeyDown(KeyCode.V))
-        {
-            UseItem(testItem2, index);
+            Item a = UseItem();
+            Debug.Log(a.name);
             UpdateToolbarUI();
         }
     }
@@ -83,7 +80,7 @@ public class InventoryManager : MonoBehaviour
     }
 
 
-    public bool AddItem(Item item)
+    public Item AddItem(Item item)
     {
         //Check if item already exists
         for (int i = 0; i < itemSlots.Length; i++)
@@ -94,7 +91,7 @@ public class InventoryManager : MonoBehaviour
                 if(itemSlots[i].slotAmount < stackLimit)
                 {
                     itemSlots[i].slotAmount++;
-                    return true;
+                    return itemSlots[i].slotItem;
                 }
             }
         }
@@ -106,34 +103,97 @@ public class InventoryManager : MonoBehaviour
             {
                 itemSlots[j].slotItem = item;
                 itemSlots[j].slotAmount = 1;
-                return true;
+                return itemSlots[j].slotItem;
             }
         }
 
+        return null;
+    }
+
+    public bool CheckItem(Stations station)
+    {
+        Item input_item = itemSlots[index].slotItem;
+        if (input_item != null)
+        {
+            switch (station)
+            {
+                case Stations.Dissolver:
+                    if (input_item.type == ItemType.Flower || input_item.type == ItemType.Stone || input_item.type == ItemType.Metal)
+                    {
+                        return true;
+                    }
+                    break;
+                case Stations.Separator:
+                    if (input_item.type == ItemType.Bowl | input_item.type == ItemType.Essence)
+                    {
+                        return true;
+                    }
+                    break;
+                case Stations.Crucible:
+                    if (input_item.type == ItemType.Vial || input_item.type == ItemType.Spice || input_item.type == ItemType.Essence)
+                    {
+                        return true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
         return false;
     }
 
-    public bool UseItem(Item item, int index)
+    public bool EmptySlot()
     {
-        for (int i = 0; i < itemSlots.Length; i++)
+        if (itemSlots[index].slotAmount == 0)
         {
-            //If item in index specified and exists
-            if (itemSlots[i].slotItem == item && i == index)
+            return true;
+        }
+        return false;
+    }
+
+    public bool FreeSlot()
+    {
+        for (int j = 0; j < itemSlots.Length; j++)
+        {
+            //If empty slot
+            if (itemSlots[j].slotAmount == 0)
             {
-                itemSlots[i].slotAmount--;
-                //If items run out, reset slot
-                if(itemSlots[i].slotAmount < 1)
-                {
-                    itemSlots[i].slotIndex = i;
-                    itemSlots[i].slotItem = null;
-                    itemSlots[i].slotAmount = 0;
-                }
                 return true;
-
-
             }
         }
         return false;
+    }
+
+    public Item UseItem()
+    {
+        if (itemSlots[index].slotAmount != 0)
+        {
+            for (int i = 0; i < itemSlots.Length; i++)
+            {
+                //If item in index specified and exists
+                if (itemSlots[i].slotItem != null && i == index)
+                {
+                    Debug.Log(itemSlots[i].slotItem.name);
+                    itemSlots[i].slotAmount--;
+                    Item output = itemSlots[i].slotItem;
+                    //If items run out, reset slot
+                    if (itemSlots[i].slotAmount < 1)
+                    {
+                        itemSlots[i].slotIndex = i;
+                        itemSlots[i].slotItem = null;
+                        itemSlots[i].slotAmount = 0;
+                    }
+                    return output;
+
+
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("No item selected to use");
+        }
+        return null;
     }
 
     public void UpdateToolbarUI()

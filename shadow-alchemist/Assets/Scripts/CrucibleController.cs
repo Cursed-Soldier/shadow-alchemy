@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 public class CrucibleController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class CrucibleController : MonoBehaviour
     public GameObject outputIcon;
     public GameObject outputBubble;
     public GameObject gameManager;
+    public GameObject inputBubble;
+    public Image[] inputIcons;
 
     public bool mixing = false;
 
@@ -20,6 +23,7 @@ public class CrucibleController : MonoBehaviour
 
     public Item[] metals;
 
+    public int index = 0;
     private Item[] itemsInCrucible;
     public Item metalLining = null;
 
@@ -34,10 +38,10 @@ public class CrucibleController : MonoBehaviour
         itemsInCrucible = new Item[3];
         metals = gameManager.GetComponent<Recipes>().metals;
         //Testing
-        itemsInCrucible[0] = testItem1;
-        itemsInCrucible[1] = testItem2;
-        itemsInCrucible[2] = testItem3;
-        metalLining = testItem4;
+        //itemsInCrucible[0] = testItem1;
+        //itemsInCrucible[1] = testItem2;
+        //itemsInCrucible[2] = testItem3;
+        //metalLining = testItem4;
 
         //Mix(itemsInCrucible);
 
@@ -47,8 +51,12 @@ public class CrucibleController : MonoBehaviour
     {
         if (outputWaiting)
         {
-            outputIcon.GetComponent<SpriteRenderer>().sprite = output.icon;
-            outputWaiting = false;
+            if (!outputBubble.activeInHierarchy)
+            {
+                outputIcon.GetComponent<SpriteRenderer>().sprite = output.icon;
+                outputIcon.SetActive(true);
+                outputBubble.SetActive(true);
+            }
         }
     }
 
@@ -76,6 +84,70 @@ public class CrucibleController : MonoBehaviour
                 outputValue = ItemValue.None;
             }
         }
+    }
+
+    public Item CollectItem()
+    {
+        Item ret = output;
+        if (outputWaiting)
+        {
+            outputWaiting = false;
+            output = null;
+            outputIcon.GetComponent<SpriteRenderer>().sprite = null;
+            outputIcon.SetActive(false);
+            outputBubble.SetActive(false);
+        }
+        return ret;
+
+    }
+
+    public bool FreeCrucibleSpot()
+    {
+        if(index <= 2 && itemsInCrucible[2] == null)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void AddToCrucible(Item item)
+    {
+        if (index >= 0 && itemsInCrucible[0] != null)
+        {
+            index++;
+        }
+        itemsInCrucible[index] = item;
+        inputIcons[index].sprite = item.icon;
+        
+        if (!inputBubble.activeInHierarchy)
+        {
+            inputBubble.SetActive(true);
+        }
+        
+    }
+
+    public Item RemoveFromCrucible()
+    {
+        Item ret = null;
+        if (itemsInCrucible[0] != null)
+        {
+            ret = itemsInCrucible[index];
+            itemsInCrucible[index] = null;
+            inputIcons[index].sprite = null;
+            
+            if(index > 0)
+            {
+                index--;
+                
+            }
+            else
+            {
+                inputBubble.SetActive(false);
+            }
+        }    
+
+       
+        return ret;
     }
 
     private bool CheckIngredients(Item[] ingredients)
@@ -131,6 +203,8 @@ public class CrucibleController : MonoBehaviour
     public IEnumerator MixingCoroutine(Recipe recipe)
     {
         mixing = true;
+        itemsInCrucible = new Item[3];
+        index = 0;
         yield return new WaitForSeconds(timeToMix);
         Debug.Log("MIXED");
         //Check metal value of new potion

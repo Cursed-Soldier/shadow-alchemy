@@ -12,6 +12,17 @@ public class PlayerMovement : MonoBehaviour
     public int maxIndex = 8;
     public int scrollIndex;
 
+    //Interact vars
+    public List<GameObject> interactableObjects = new List<GameObject>();
+    public bool canInteract;
+    public GameObject currentInteract;
+    public InteractType interactType;
+
+    public InventoryManager invManager;
+    public DissolverController dissolver;
+    public SeparatorController separator;
+    public CrucibleController crucible;
+
 
     public float moveSpeed = 10f;
 
@@ -19,6 +30,11 @@ public class PlayerMovement : MonoBehaviour
     {
         input = new PlayerControls();
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        currentInteract = null;
     }
 
     private void FixedUpdate()
@@ -37,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
         input.Player.Movement.performed += OnMovementPerformed;
         input.Player.Movement.canceled += OnMovementCancelled;
         input.Player.Scroll.performed += OnScroll;
+        input.Player.Interact.performed += OnInteract;
 
     }
 
@@ -49,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
         input.Player.Movement.performed -= OnMovementPerformed;
         input.Player.Movement.canceled -= OnMovementCancelled;
         input.Player.Scroll.performed -= OnScroll;
+        input.Player.Interact.performed -= OnInteract;
     }
 
 
@@ -93,5 +111,226 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnInteract(InputAction.CallbackContext value)
+    {
+        if (canInteract)
+        {
+            if (interactableObjects.Count > 0)
+            {
+                InteractType objType = interactableObjects[0].GetComponent<Interact>().type;             
+
+
+                switch (objType)
+                {
+                    case InteractType.None:
+                        break;
+                    case InteractType.Dissolver:
+                        if (invManager.EmptySlot())
+                        {
+                            //Collect item if possible
+                            Item collectedItem = dissolver.CollectItem();
+                            if(collectedItem == null)
+                            {
+                                Debug.Log("No item to collect");
+                            }
+                            else
+                            {
+                                Item added = invManager.AddItem(collectedItem);
+                                if(added == null)
+                                {
+                                    Debug.Log("not added");
+                                }
+                                else
+                                {
+                                    Debug.Log("added");
+                                    invManager.UpdateToolbarUI();
+
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            //If item of correct type or not null
+                            if (invManager.CheckItem(Stations.Dissolver))
+                            {
+                                //If dissolver currently not working or has an output
+                                if (!dissolver.dissolving && !dissolver.outputWaiting)
+                                {
+                                    Item usedItem = invManager.UseItem();
+                                    if (usedItem != null)
+                                    {
+                                        invManager.UpdateToolbarUI();
+                                        dissolver.Dissolve(usedItem);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Debug.Log("Cannot dissolve item");
+                            }
+                        }
+                        break;
+                    case InteractType.Separator:
+                        if (invManager.EmptySlot())
+                        {
+                            //Collect item if possible
+                            Item collectedItem = separator.CollectItem();
+                            if (collectedItem == null)
+                            {
+                                Debug.Log("No item to collect");
+                            }
+                            else
+                            {
+                                Item added = invManager.AddItem(collectedItem);
+                                if (added == null)
+                                {
+                                    Debug.Log("not added");
+                                }
+                                else
+                                {
+                                    Debug.Log("added");
+                                    invManager.UpdateToolbarUI();
+
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            //If item of correct type or not null
+                            if (invManager.CheckItem(Stations.Separator))
+                            {
+                                //If separator currently not working or has an output
+                                if (!separator.separating && !separator.outputWaiting)
+                                {
+                                    Debug.Log("separating");
+                                    Item usedItem = invManager.UseItem();
+                                    invManager.UpdateToolbarUI();
+                                    separator.Separate(usedItem);
+                                }
+
+                            }
+                            else
+                            {
+                                Debug.Log("Cannot separate item");
+                            }
+                        }
+                        break;
+                    case InteractType.Crucible:
+                        if (invManager.EmptySlot())
+                        {
+                            //Collect item if possible
+                            Item collectedItem = crucible.CollectItem();
+                            if (collectedItem == null)
+                            {
+                                Debug.Log("No item to collect");
+                                //Check if there is a free slot
+                                if (invManager.FreeSlot())
+                                {
+                                    //Check if we can remove item from crucible
+                                    Item crucibleItem = crucible.RemoveFromCrucible();
+                                    if (crucibleItem == null)
+                                    {
+                                        Debug.Log("Not possible to remove item");
+                                    }
+                                    else
+                                    {
+                                        Debug.Log("Item returned");
+                                        Item added = invManager.AddItem(crucibleItem);
+                                        if (added == null)
+                                        {
+                                            Debug.Log("not added");
+                                        }
+                                        else
+                                        {
+                                            Debug.Log("added");
+                                            invManager.UpdateToolbarUI();
+
+                                        }
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                Item added = invManager.AddItem(collectedItem);
+                                if (added == null)
+                                {
+                                    Debug.Log("not added");
+                                }
+                                else
+                                {
+                                    Debug.Log("added");
+                                    invManager.UpdateToolbarUI();
+
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            //If item of correct type or not null
+                            if (invManager.CheckItem(Stations.Crucible))
+                            {
+                                //If separator currently not working or has an output
+                                if (!crucible.mixing && !crucible.outputWaiting)
+                                {
+                                   
+                                    if (crucible.FreeCrucibleSpot())
+                                    {
+                                        Item usedItem = invManager.UseItem();
+                                        invManager.UpdateToolbarUI();
+                                        crucible.AddToCrucible(usedItem);
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                Debug.Log("Cannot mix item");
+                            }
+                        }
+                        break;
+                    case InteractType.Shop:
+                        break;
+                    case InteractType.Export:
+                        break;
+                    case InteractType.Pickup:
+                        //Check what i am closest to (which station or table etc)
+                        //If i am holding nothing
+                        //See if there is an output item in the waiting slot
+                        //If so take it and clear the station/table
+                        //Otherwise do nothring
+                        Debug.Log("pickup");
+                        break;
+                    case InteractType.Table:
+                        break;
+                    default:
+                        break;
+
+                }
+
+                currentInteract = interactableObjects[0];
+
+            }
+            
+            
+        }
+    }
+
 }
+
+public enum InteractType 
+{
+    None,
+    Dissolver,
+    Separator,
+    Crucible,
+    Shop,
+    Export,
+    Pickup,
+    Table
+}
+
 
