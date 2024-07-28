@@ -24,6 +24,7 @@ public class DetectionBar : MonoBehaviour
         thresholdTimer = 10;
         isDetectionLowered = false;
         isCoroutineStarted = false;
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
