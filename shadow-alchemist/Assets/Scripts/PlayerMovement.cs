@@ -317,10 +317,9 @@ public class PlayerMovement : MonoBehaviour
                         else
                         {
                             Item usedItem = invManager.UseItem();
-                            Debug.Log(usedItem.name);
                             invManager.UpdateToolbarUI();
                             float goldEarned = exportDepot.SellPotion(usedItem);
-                            Debug.Log(goldEarned);
+                            Debug.Log("Gold : +"+goldEarned.ToString());
                             // gold += usedItem.sellPrice
                         }
                         

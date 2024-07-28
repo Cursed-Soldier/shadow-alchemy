@@ -16,7 +16,8 @@ MonoBehaviour:
   icon: {fileID: 277067183, guid: 673d801667a777d45931d250de8d1577, type: 3}
   type: 7
   stackable: 0
-  multiplier: 0
+  multiplier: 1
+  value: 0
   default_price: 0
   sellable: 0
   sell_price: 0
