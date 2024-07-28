@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d77cef9e0dcb6da45ab1cc5cb51d4304, type: 3}
-  m_Name: Rose_Vial
+  m_Name: Silver_Pot
   m_EditorClassIdentifier: 
-  itemName: Rose Vial
-  icon: {fileID: -413866903, guid: 673d801667a777d45931d250de8d1577, type: 3}
-  type: 8
-  stackable: 1
+  itemName: Silver Pot
+  icon: {fileID: -268879645, guid: 673d801667a777d45931d250de8d1577, type: 3}
+  type: 6
+  stackable: 0
   multiplier: 0
   default_price: 0
-  sellable: 1
-  sell_price: 50
+  sellable: 0
+  sell_price: 0
