@@ -10,6 +10,7 @@ public class DetectionBar : MonoBehaviour
     public int detectionTimer;
     public int thresholdTimer;
     public Slider slider;
+    public GameObject GameOverUI;
     bool isDetectionLowered;
     bool isThresholdDetection;
     bool isCoroutineStarted;
@@ -18,7 +19,7 @@ public class DetectionBar : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        currentDetection = 100;
+        currentDetection = 150;
         detectionTimer = 5;
         thresholdTimer = 10;
         isDetectionLowered = false;
@@ -77,7 +78,9 @@ public class DetectionBar : MonoBehaviour
         if(currentDetection >= 100)
         {
             //EndGame
-            Debug.Log("End Game");
+            Time.timeScale = 0;
+            GameOverUI.SetActive(true);
+            StopCoroutine(thresholdCoroutine);
         }
         isThresholdDetection = false;
     }
