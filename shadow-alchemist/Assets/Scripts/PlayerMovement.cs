@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public DissolverController dissolver;
     public SeparatorController separator;
     public CrucibleController crucible;
+    public Export exportDepot;
 
 
     public float moveSpeed = 10f;
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     {
         input = new PlayerControls();
         rb = GetComponent<Rigidbody2D>();
+        Time.timeScale = 1;
     }
 
     private void Start()
@@ -308,14 +310,21 @@ public class PlayerMovement : MonoBehaviour
                     case InteractType.Shop:
                         break;
                     case InteractType.Export:
+                        if (invManager.EmptySlot())
+                        {
+                            Debug.Log("Cannot sell");
+                        }
+                        else
+                        {
+                            Item usedItem = invManager.UseItem();
+                            invManager.UpdateToolbarUI();
+                            float goldEarned = exportDepot.SellPotion(usedItem);
+                            Debug.Log("Gold : +"+goldEarned.ToString());
+                            // gold += usedItem.sellPrice
+                        }
+                        
                         break;
                     case InteractType.Pickup:
-                        //Check what i am closest to (which station or table etc)
-                        //If i am holding nothing
-                        //See if there is an output item in the waiting slot
-                        //If so take it and clear the station/table
-                        //Otherwise do nothring
-                        Debug.Log("pickup");
                         break;
                     case InteractType.Table:
                         break;
