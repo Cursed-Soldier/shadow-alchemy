@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Export : MonoBehaviour
 {
-    //public DetectionBar detection;
+    public DetectionBar detection;
     public int detectionChange;
     
     public float SellPotion(Item item)
     {
         // Increase detection
-        //detection.UpdateDetection(detectionChange);
+        detection.UpdateDetection(detectionChange);
         Debug.Log(item.name);
         Debug.Log(item.sell_price);
         Debug.Log(item.multiplier);

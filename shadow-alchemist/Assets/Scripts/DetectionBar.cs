@@ -19,9 +19,10 @@ public class DetectionBar : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        currentDetection = 150;
+        currentDetection = 100;
         detectionTimer = 5;
         thresholdTimer = 10;
+
         isDetectionLowered = false;
         isCoroutineStarted = false;
         Time.timeScale = 1;
