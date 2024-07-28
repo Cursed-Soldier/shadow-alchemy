@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gold = 200;
-        goldRequired = 200;
+        goldRequired = 300;
         goldText.text = gold.ToString();
     }
 
