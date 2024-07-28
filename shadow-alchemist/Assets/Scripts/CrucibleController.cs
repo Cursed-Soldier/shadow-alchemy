@@ -58,11 +58,21 @@ public class CrucibleController : MonoBehaviour
                 outputBubble.SetActive(true);
             }
         }
+
+        else
+        {
+            if (!FreeCrucibleSpot() && metalLining != null && !mixing)
+            {
+                //Mix
+                Mix(itemsInCrucible);
+            }
+        }
     }
 
     private void CheckLining()
     {
-
+        Debug.Log(metalLining.name);
+        Debug.Log(metals[0].name);
         {
             if (metalLining.name.Equals(metals[0].name))//Copper
             {
@@ -126,6 +136,19 @@ public class CrucibleController : MonoBehaviour
         
     }
 
+    public void AddMetal(Item item)
+    {
+        if(metalLining == null)
+        {
+            metalLining = item;
+            Debug.Log("adding metal");
+            if (!inputBubble.activeInHierarchy)
+            {
+                inputBubble.SetActive(true);
+            }
+        }
+    }
+
     public Item RemoveFromCrucible()
     {
         Item ret = null;
@@ -159,7 +182,6 @@ public class CrucibleController : MonoBehaviour
             {
                 if (ingredients[i].type == ItemType.Vial || ingredients[i].type == ItemType.Spice || ingredients[i].type == ItemType.Essence)
                 {
-                    Debug.Log(ingredients[i].name);
                     count++;
                 }
             }
@@ -203,23 +225,39 @@ public class CrucibleController : MonoBehaviour
     public IEnumerator MixingCoroutine(Recipe recipe)
     {
         mixing = true;
-        itemsInCrucible = new Item[3];
-        index = 0;
+        
+        inputBubble.SetActive(false);
+        for (int i = 0; i < inputIcons.Length; i++)
+        {
+            inputIcons[index].sprite = null;
+        }
+        
         yield return new WaitForSeconds(timeToMix);
         Debug.Log("MIXED");
         //Check metal value of new potion
         CheckLining();
         output = recipe.output;
+        output.value = outputValue;
         outputWaiting = true;
+
+        //Reset crucible
+        itemsInCrucible = new Item[3];
+        index = 0;
+        metalLining = null;
+
+        //Allow mixing
         mixing = false;
     }
 
-    public enum ItemValue 
-    {
-        Copper,
-        Silver,
-        Gold,
-        None
-    }
 
+
+}
+
+public enum ItemValue
+{
+    None,
+    Copper,
+    Silver,
+    Gold
+   
 }

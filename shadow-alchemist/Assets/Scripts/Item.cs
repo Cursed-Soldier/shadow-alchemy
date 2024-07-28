@@ -11,12 +11,17 @@ public class Item : ScriptableObject
     public ItemType type;
     public bool stackable;
 
+    public float multiplier;
+    public ItemValue value;
+
     public float default_price;
 
     public bool sellable;
     public float sell_price;
 
 }
+
+
 
 public enum ItemType 
 { 
@@ -26,6 +31,8 @@ public enum ItemType
     Stone,
     Metal,
     Bowl,
+    Pot,
+    MetalVial,
     Vial,
     Potion
 }

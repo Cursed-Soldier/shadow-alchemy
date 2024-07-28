@@ -270,22 +270,35 @@ public class PlayerMovement : MonoBehaviour
                         }
                         else
                         {
-                            //If item of correct type or not null
-                            if (invManager.CheckItem(Stations.Crucible))
+
+                            //If separator currently not working or has an output
+                            if (!crucible.mixing && !crucible.outputWaiting)
                             {
-                                //If separator currently not working or has an output
-                                if (!crucible.mixing && !crucible.outputWaiting)
+                                Debug.Log("going in");
+                                if (invManager.CheckItem(Stations.Crucible))
                                 {
-                                   
-                                    if (crucible.FreeCrucibleSpot())
+                                    Item usedItem = invManager.UseItem();
+                                    Debug.Log(usedItem.type);
+                                    //Check if item is a metal
+                                    if (usedItem.type == ItemType.MetalVial)
                                     {
-                                        Item usedItem = invManager.UseItem();
+                                        Debug.Log("Metal");
+                                        invManager.UpdateToolbarUI();
+                                        crucible.AddMetal(usedItem);
+
+                                    }
+                                    else if (crucible.FreeCrucibleSpot())
+                                    {
+                                        Debug.Log("normal add");
                                         invManager.UpdateToolbarUI();
                                         crucible.AddToCrucible(usedItem);
                                     }
                                 }
-
+                                   
+                                    
                             }
+
+                            
                             else
                             {
                                 Debug.Log("Cannot mix item");

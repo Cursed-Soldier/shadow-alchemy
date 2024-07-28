@@ -20,7 +20,9 @@ public class InventoryManager : MonoBehaviour
 
     public Item testItem;
     public Item testItem2;
-
+    public Item testItem3;
+    public Item testItem4;
+    public Item testItem5;
 
     private void Start()
     {
@@ -54,8 +56,17 @@ public class InventoryManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
-            Item a = UseItem();
-            Debug.Log(a.name);
+            AddItem(testItem3);
+            UpdateToolbarUI();
+        }
+        else if (Input.GetKeyDown(KeyCode.V))
+        {
+            AddItem(testItem4);
+            UpdateToolbarUI();
+        }
+        else if (Input.GetKeyDown(KeyCode.B))
+        {
+            AddItem(testItem5);
             UpdateToolbarUI();
         }
     }
@@ -124,7 +135,7 @@ public class InventoryManager : MonoBehaviour
                     }
                     break;
                 case Stations.Separator:
-                    if (input_item.type == ItemType.Bowl | input_item.type == ItemType.Essence)
+                    if (input_item.type == ItemType.Bowl || input_item.type == ItemType.Essence || input_item.type == ItemType.Pot)
                     {
                         return true;
                     }
@@ -132,6 +143,11 @@ public class InventoryManager : MonoBehaviour
                 case Stations.Crucible:
                     if (input_item.type == ItemType.Vial || input_item.type == ItemType.Spice || input_item.type == ItemType.Essence)
                     {
+                        return true;
+                    }
+                    else if (input_item.type == ItemType.MetalVial)
+                    {
+                        Debug.Log("metal vial");
                         return true;
                     }
                     break;
@@ -146,6 +162,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (itemSlots[index].slotAmount == 0)
         {
+            Debug.Log(itemSlots[index].slotAmount);
             return true;
         }
         return false;
