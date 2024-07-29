@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Lavender Vial
   icon: {fileID: -776342566, guid: cab6a996aa8cff2459fd87b7ee7aa7fb, type: 3}
-  type: 0
+  type: 8
   stackable: 0
   multiplier: 0
   value: 0

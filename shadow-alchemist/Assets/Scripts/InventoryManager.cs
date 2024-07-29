@@ -44,31 +44,7 @@ public class InventoryManager : MonoBehaviour
             UpdateToolbarScroll();
         }
 
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            AddItem(testItem);
-            UpdateToolbarUI();
-        }
-        else if (Input.GetKeyDown(KeyCode.X))
-        {
-            AddItem(testItem2);
-            UpdateToolbarUI();
-        }
-        else if (Input.GetKeyDown(KeyCode.C))
-        {
-            AddItem(testItem3);
-            UpdateToolbarUI();
-        }
-        else if (Input.GetKeyDown(KeyCode.V))
-        {
-            AddItem(testItem4);
-            UpdateToolbarUI();
-        }
-        else if (Input.GetKeyDown(KeyCode.B))
-        {
-            AddItem(testItem5);
-            UpdateToolbarUI();
-        }
+        
     }
 
     /// <summary>

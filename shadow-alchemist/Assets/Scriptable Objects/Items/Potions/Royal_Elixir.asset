@@ -17,7 +17,7 @@ MonoBehaviour:
   type: 9
   stackable: 0
   multiplier: 0
-  value: 0
+  value: 1
   default_price: 0
   sellable: 0
-  sell_price: 300
+  sell_price: 250

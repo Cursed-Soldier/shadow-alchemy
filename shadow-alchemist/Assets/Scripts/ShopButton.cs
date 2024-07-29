@@ -20,7 +20,7 @@ public class ShopButton : MonoBehaviour
     {
 
         shopBtn.onClick.AddListener(Buy);
-        title.text = output.name;
+        title.text = output.itemName;
         icon.sprite = output.icon;
         goldText.text = output.default_price.ToString();
         gm = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManager>();
@@ -37,7 +37,7 @@ public class ShopButton : MonoBehaviour
             {
                 gm.AddGold(-output.default_price);
                 invMan.UpdateToolbarUI();
-                Debug.Log("bought item : " + output.name);
+                Debug.Log("bought item : " + output.itemName);
             }
             else
             {

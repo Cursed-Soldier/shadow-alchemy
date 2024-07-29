@@ -18,6 +18,7 @@ public class CrucibleController : MonoBehaviour
     public bool mixing = false;
 
     public ItemValue outputValue;
+    public float multiplier;
     public bool outputWaiting = false;
     public Item output = null;
 
@@ -27,23 +28,11 @@ public class CrucibleController : MonoBehaviour
     private Item[] itemsInCrucible;
     public Item metalLining = null;
 
-    public Item testItem1;
-    public Item testItem2;
-    public Item testItem3;
-    public Item testItem4;
-
     private void Start()
     {
         gameManager = GameObject.Find("RecipeManager");
         itemsInCrucible = new Item[3];
         metals = gameManager.GetComponent<Recipes>().metals;
-        //Testing
-        //itemsInCrucible[0] = testItem1;
-        //itemsInCrucible[1] = testItem2;
-        //itemsInCrucible[2] = testItem3;
-        //metalLining = testItem4;
-
-        //Mix(itemsInCrucible);
 
     }
 
@@ -77,16 +66,19 @@ public class CrucibleController : MonoBehaviour
             if (metalLining.name.Equals(metals[0].name))//Copper
             {
                 outputValue = ItemValue.Copper;
+                multiplier = 1;
 
             }
             else if (metalLining.name.Equals(metals[1].name))//Silver
             {
                 outputValue = ItemValue.Silver;
+                multiplier = 1.25f;
 
             }
             else if (metalLining.name.Equals(metals[2].name))//Gold
             {
                 outputValue = ItemValue.Gold;
+                multiplier = 1.5f;
 
             }
             else
@@ -129,10 +121,14 @@ public class CrucibleController : MonoBehaviour
         }
         itemsInCrucible[index] = item;
         inputIcons[index].sprite = item.icon;
-        
+        Color opacity = inputIcons[index].color;
+        opacity.a = 1;
+        inputIcons[index].color = opacity;
+
         if (!inputBubble.activeInHierarchy)
         {
             inputBubble.SetActive(true);
+
         }
         
     }
@@ -143,6 +139,11 @@ public class CrucibleController : MonoBehaviour
         {
             metalLining = item;
             Debug.Log("adding metal");
+            inputIcons[3].sprite = item.icon;
+            Color opacity = inputIcons[3].color;
+            opacity.a = 1;
+            inputIcons[3].color = opacity;
+
             if (!inputBubble.activeInHierarchy)
             {
                 inputBubble.SetActive(true);
@@ -158,8 +159,11 @@ public class CrucibleController : MonoBehaviour
             ret = itemsInCrucible[index];
             itemsInCrucible[index] = null;
             inputIcons[index].sprite = null;
-            
-            if(index > 0)
+            Color opacity = inputIcons[index].color;
+            opacity.a = 0;
+            inputIcons[index].color = opacity;
+
+            if (index > 0)
             {
                 index--;
                 
@@ -239,12 +243,23 @@ public class CrucibleController : MonoBehaviour
         CheckLining();
         output = recipe.output;
         output.value = outputValue;
+        output.multiplier = multiplier;
         outputWaiting = true;
 
         //Reset crucible
         itemsInCrucible = new Item[3];
         index = 0;
         metalLining = null;
+        foreach (Image icon in inputIcons)
+        {
+            icon.sprite = null;
+            Color opacity = icon.color;
+            opacity.a = 0;
+            icon.color = opacity;
+        }
+        {
+
+        }
 
         //Allow mixing
         mixing = false;
