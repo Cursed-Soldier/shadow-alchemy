@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d77cef9e0dcb6da45ab1cc5cb51d4304, type: 3}
   m_Name: Dark_Essence
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Dark Essence
   icon: {fileID: 2073189609, guid: cab6a996aa8cff2459fd87b7ee7aa7fb, type: 3}
   type: 2
   stackable: 0

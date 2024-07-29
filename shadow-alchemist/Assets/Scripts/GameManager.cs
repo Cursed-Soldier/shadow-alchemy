@@ -12,8 +12,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        gold = 0f;
-        goldRequired = 300f;
         goldText.text = gold.ToString();
     }
 
