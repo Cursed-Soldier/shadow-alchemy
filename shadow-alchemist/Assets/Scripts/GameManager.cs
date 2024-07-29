@@ -5,15 +5,13 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public int gold;
-    public int goldRequired;
+    public float gold;
+    public float goldRequired;
     public TMP_Text goldText;
     public GameObject WinScreenUI;
 
     void Start()
     {
-        gold = 200;
-        goldRequired = 300;
         goldText.text = gold.ToString();
     }
 
@@ -24,6 +22,12 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             WinScreenUI.SetActive(true);
         }
+    }
+
+    public void AddGold(float added)
+    {
+        gold += added;
+        goldText.text = gold.ToString();
     }
 
 

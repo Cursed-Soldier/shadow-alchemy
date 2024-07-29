@@ -23,7 +23,9 @@ public class PlayerMovement : MonoBehaviour
     public SeparatorController separator;
     public CrucibleController crucible;
     public Export exportDepot;
+    public OpenShop shop;
 
+    public GameManager gm;
 
     public float moveSpeed = 10f;
 
@@ -308,6 +310,7 @@ public class PlayerMovement : MonoBehaviour
                         }
                         break;
                     case InteractType.Shop:
+                        shop.ToggleShop();
                         break;
                     case InteractType.Export:
                         if (invManager.EmptySlot())
@@ -320,6 +323,7 @@ public class PlayerMovement : MonoBehaviour
                             invManager.UpdateToolbarUI();
                             float goldEarned = exportDepot.SellPotion(usedItem);
                             Debug.Log("Gold : +"+goldEarned.ToString());
+                            gm.AddGold(goldEarned);
                             // gold += usedItem.sellPrice
                         }
                         

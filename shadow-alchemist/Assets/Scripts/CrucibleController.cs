@@ -122,6 +122,7 @@ public class CrucibleController : MonoBehaviour
 
     public void AddToCrucible(Item item)
     {
+        Debug.Log("added");
         if (index >= 0 && itemsInCrucible[0] != null)
         {
             index++;
