@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     public SeparatorController separator;
     public CrucibleController crucible;
     public Export exportDepot;
+    public OpenShop shop;
 
     public GameManager gm;
 
@@ -309,6 +310,7 @@ public class PlayerMovement : MonoBehaviour
                         }
                         break;
                     case InteractType.Shop:
+                        shop.ToggleShop();
                         break;
                     case InteractType.Export:
                         if (invManager.EmptySlot())

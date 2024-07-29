@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Copper_Vial
   m_EditorClassIdentifier: 
   itemName: Copper_Vial
-  icon: {fileID: 1713709306, guid: 673d801667a777d45931d250de8d1577, type: 3}
+  icon: {fileID: 1701491405, guid: cab6a996aa8cff2459fd87b7ee7aa7fb, type: 3}
   type: 7
   stackable: 1
   multiplier: 1

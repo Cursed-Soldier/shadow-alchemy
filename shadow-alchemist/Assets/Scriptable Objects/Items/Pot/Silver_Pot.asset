@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Silver_Pot
   m_EditorClassIdentifier: 
   itemName: Silver Pot
-  icon: {fileID: -268879645, guid: 673d801667a777d45931d250de8d1577, type: 3}
+  icon: {fileID: -1039673434, guid: cab6a996aa8cff2459fd87b7ee7aa7fb, type: 3}
   type: 6
   stackable: 0
   multiplier: 1

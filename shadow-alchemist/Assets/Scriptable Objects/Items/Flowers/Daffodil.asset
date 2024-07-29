@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Daffodil
   m_EditorClassIdentifier: 
   itemName: Daffodil
-  icon: {fileID: 1895984794, guid: 673d801667a777d45931d250de8d1577, type: 3}
+  icon: {fileID: -82801309, guid: cab6a996aa8cff2459fd87b7ee7aa7fb, type: 3}
   type: 0
   stackable: 1
   multiplier: 1

@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public void AddGold(float added)
     {
         gold += added;
+        goldText.text = gold.ToString();
     }
 
 

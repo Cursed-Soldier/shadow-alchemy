@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Copper_Bar
   m_EditorClassIdentifier: 
   itemName: Copper Bar
-  icon: {fileID: 1330918956, guid: 673d801667a777d45931d250de8d1577, type: 3}
+  icon: {fileID: 1997342813, guid: cab6a996aa8cff2459fd87b7ee7aa7fb, type: 3}
   type: 4
   stackable: 0
   multiplier: 1
