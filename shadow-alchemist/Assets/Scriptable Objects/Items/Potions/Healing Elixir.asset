@@ -20,4 +20,4 @@ MonoBehaviour:
   value: 1
   default_price: 0
   sellable: 1
-  sell_price: 50
+  sell_price: 75

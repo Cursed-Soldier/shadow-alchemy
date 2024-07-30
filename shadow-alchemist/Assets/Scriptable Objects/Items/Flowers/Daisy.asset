@@ -18,6 +18,6 @@ MonoBehaviour:
   stackable: 0
   multiplier: 0
   value: 0
-  default_price: 10
+  default_price: 5
   sellable: 0
   sell_price: 5

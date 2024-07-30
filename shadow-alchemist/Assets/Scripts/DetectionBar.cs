@@ -42,6 +42,10 @@ public class DetectionBar : MonoBehaviour
             StopCoroutine(thresholdCoroutine);
             isCoroutineStarted = false;
         }
+        else if (currentDetection < 1)
+        {
+            currentDetection = 1;
+        }
 
         if(!isDetectionLowered)
         {
