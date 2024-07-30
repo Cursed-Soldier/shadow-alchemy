@@ -14,6 +14,7 @@ public class Export : MonoBehaviour
         Debug.Log(item.name);
         Debug.Log(item.sell_price);
         Debug.Log(item.multiplier);
+
         return item.sell_price * item.multiplier;
     }
 }
