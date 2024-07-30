@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
     public Export exportDepot;
     public OpenShop shop;
 
+    public GameObject pauseScreen;
+
     public GameManager gm;
 
     public float moveSpeed = 10f;
@@ -60,6 +62,8 @@ public class PlayerMovement : MonoBehaviour
      
     }
 
+
+
     //Enable the input system for moving player
     private void OnEnable()
     {
@@ -72,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
         input.Player.Movement.canceled += OnMovementCancelled;
         input.Player.Scroll.performed += OnScroll;
         input.Player.Interact.performed += OnInteract;
+        input.Player.Pause.performed += OnPause;
 
     }
 
@@ -85,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
         input.Player.Movement.canceled -= OnMovementCancelled;
         input.Player.Scroll.performed -= OnScroll;
         input.Player.Interact.performed -= OnInteract;
+        input.Player.Pause.performed -= OnPause;
     }
 
 
@@ -101,6 +107,19 @@ public class PlayerMovement : MonoBehaviour
     private void OnMovementCancelled(InputAction.CallbackContext value)
     {
         moveVector = Vector2.zero;
+    }
+
+    private void OnPause(InputAction.CallbackContext value)
+    {
+        pauseScreen.SetActive(!pauseScreen.activeInHierarchy);
+        if (pauseScreen.activeInHierarchy)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 
     private void OnScroll(InputAction.CallbackContext value)
