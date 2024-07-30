@@ -14,7 +14,7 @@ public class DetectionBar : MonoBehaviour
     bool isThresholdDetection;
     bool isCoroutineStarted;
     Coroutine thresholdCoroutine;
-
+    
     // Start is called before the first frame update
     void Awake()
     {
@@ -24,6 +24,9 @@ public class DetectionBar : MonoBehaviour
 
         isDetectionLowered = false;
         isCoroutineStarted = false;
+        isRandomEvent = false;
+        isRandomEventOnCooldown = false;
+        isOrderFufilled = false;
         Time.timeScale = 1;
     }
 
@@ -66,7 +69,7 @@ public class DetectionBar : MonoBehaviour
         Debug.Log("detection");
         if(currentDetection != 0)
         {
-            currentDetection-=1;
+            currentDetection+=1;
         }
         isDetectionLowered = false;
     }
