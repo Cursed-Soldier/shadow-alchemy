@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerControls input = null;
     private Vector2 moveVector = Vector2.zero;
     private Rigidbody2D rb = null;
+    public Animator anim;
 
     public int maxIndex = 8;
     public int scrollIndex;
@@ -44,6 +45,19 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = Vector2.Lerp(rb.velocity, moveVector * moveSpeed, 0.5f);
+        if(moveVector.x > 0 || moveVector.x < 0)
+        {
+            //right animation
+            anim.SetFloat("MoveX", moveVector.x);
+        }
+        else
+        {
+            if(anim.GetFloat("MoveX") != 0)
+            {
+                anim.SetFloat("MoveX", 0);
+            }
+        }
+     
     }
 
     //Enable the input system for moving player
