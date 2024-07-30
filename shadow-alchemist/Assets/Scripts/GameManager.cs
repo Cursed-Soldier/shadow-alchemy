@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(gold == goldRequired)
+        if(gold >= goldRequired)
         {
             Time.timeScale = 0;
             WinScreenUI.SetActive(true);

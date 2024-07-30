@@ -20,16 +20,12 @@ public class DetectionBar : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        currentDetection = 100;
+        
         detectionAmountText.text = currentDetection.ToString();
-        detectionTimer = 5;
-        thresholdTimer = 10;
+       
 
         isDetectionLowered = false;
         isCoroutineStarted = false;
-        isRandomEvent = false;
-        isRandomEventOnCooldown = false;
-        isOrderFufilled = false;
         Time.timeScale = 1;
     }
 
@@ -45,6 +41,10 @@ public class DetectionBar : MonoBehaviour
         {
             StopCoroutine(thresholdCoroutine);
             isCoroutineStarted = false;
+        }
+        else if (currentDetection < 1)
+        {
+            currentDetection = 1;
         }
 
         if(!isDetectionLowered)
