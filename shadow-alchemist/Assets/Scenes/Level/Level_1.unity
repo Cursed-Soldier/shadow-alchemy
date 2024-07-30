@@ -280,6 +280,10 @@ PrefabInstance:
       propertyPath: exportDepot
       value: 
       objectReference: {fileID: 1766389650}
+    - target: {fileID: 3785576592275557805, guid: 0838195bd810cb64d94ebbdba6908f1d, type: 3}
+      propertyPath: pauseScreen
+      value: 
+      objectReference: {fileID: 1601629675}
     - target: {fileID: 6133958992312403630, guid: 0838195bd810cb64d94ebbdba6908f1d, type: 3}
       propertyPath: m_Constraints
       value: 4
@@ -1427,6 +1431,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8209078731746970124}
     m_Modifications:
+    - target: {fileID: 1364074380034118861, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.14901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 1364074380034118861, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.1254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 1364074380034118861, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.1254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 1364074380034118861, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4280688672
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969712638460226089, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969712638460226089, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.14509805
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969712638460226089, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.78431374
+      objectReference: {fileID: 0}
     - target: {fileID: 2008202159925460932, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1507,10 +1539,58 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3049690939221473649, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.14901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049690939221473649, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.1254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049690939221473649, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.1254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049690939221473649, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4280688672
+      objectReference: {fileID: 0}
     - target: {fileID: 4577153300202068546, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
       propertyPath: m_text
       value: A secret Buyer wishes for you to make a certain potion for an increased
         price. When you do, the Buyer will also lower your detection.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577153300202068546, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.14901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577153300202068546, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.1254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577153300202068546, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.1254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 4577153300202068546, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4280688672
+      objectReference: {fileID: 0}
+    - target: {fileID: 4591226086014114797, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.14901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 4591226086014114797, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.1254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 4591226086014114797, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.1254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 4591226086014114797, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4280688672
       objectReference: {fileID: 0}
     - target: {fileID: 7042581947169353668, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
       propertyPath: m_Name
@@ -1519,6 +1599,38 @@ PrefabInstance:
     - target: {fileID: 7042581947169353668, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7848554733703200042, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.14901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 7848554733703200042, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.1254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 7848554733703200042, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.1254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 7848554733703200042, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4280688672
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912081105024067449, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.14901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912081105024067449, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.1254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912081105024067449, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.1254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912081105024067449, guid: c31ffa6cf5ac61f40b94e6828ca0629c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4280688672
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12072,6 +12184,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1590524749}
   m_CullTransparentMesh: 1
+--- !u!1 &1601629675 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4206326768749925608, guid: e7c9b3a7e75381f4a8e51cc2ec1f0e27, type: 3}
+  m_PrefabInstance: {fileID: 1760451414}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1603364290
 GameObject:
   m_ObjectHideFlags: 0
@@ -13223,6 +13340,18 @@ PrefabInstance:
     - target: {fileID: 4206326768749925608, guid: e7c9b3a7e75381f4a8e51cc2ec1f0e27, type: 3}
       propertyPath: m_Name
       value: PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4206326768749925608, guid: e7c9b3a7e75381f4a8e51cc2ec1f0e27, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9184809892093746411, guid: e7c9b3a7e75381f4a8e51cc2ec1f0e27, type: 3}
+      propertyPath: m_fontSize
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 9184809892093746411, guid: e7c9b3a7e75381f4a8e51cc2ec1f0e27, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
