@@ -44,7 +44,7 @@ public class SeparatorController : MonoBehaviour
     {
         
 
-        if (input_item.type == ItemType.Bowl || input_item.type == ItemType.Pot || input_item.type == ItemType.Essence)
+        if (input_item.type == ItemType.Bowl || input_item.type == ItemType.Pot)
         {
             Item[] ingredient = { input_item };
             //Look for item in separator recipes

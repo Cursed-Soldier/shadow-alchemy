@@ -9,15 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d77cef9e0dcb6da45ab1cc5cb51d4304, type: 3}
-  m_Name: Ginger
+  m_Script: {fileID: 11500000, guid: 3c2ba2d9233caa441a990af04259ea1e, type: 3}
+  m_Name: Amethyst_Pot
   m_EditorClassIdentifier: 
-  itemName: Ginger
-  icon: {fileID: -878559235, guid: cab6a996aa8cff2459fd87b7ee7aa7fb, type: 3}
-  type: 1
-  stackable: 0
-  multiplier: 0
-  value: 0
-  default_price: 10
-  sellable: 0
-  sell_price: 0
+  recipe_name: Amethyst Pot
+  ingredients:
+  - {fileID: 11400000, guid: 45d57716f5ed90645b5f7517531b784a, type: 2}
+  output: {fileID: 11400000, guid: 95d322b17ca185949a337aec105b12c0, type: 2}
