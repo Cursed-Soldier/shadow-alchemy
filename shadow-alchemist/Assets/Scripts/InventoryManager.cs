@@ -111,7 +111,7 @@ public class InventoryManager : MonoBehaviour
                     }
                     break;
                 case Stations.Separator:
-                    if (input_item.type == ItemType.Bowl || input_item.type == ItemType.Essence || input_item.type == ItemType.Pot)
+                    if (input_item.type == ItemType.Bowl || input_item.type == ItemType.Pot)
                     {
                         return true;
                     }
