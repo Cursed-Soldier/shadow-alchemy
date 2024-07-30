@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DetectionBar : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class DetectionBar : MonoBehaviour
     public int thresholdTimer;
     public Slider slider;
     public GameObject GameOverUI;
+    public TMP_Text detectionAmountText;
     bool isDetectionLowered;
     bool isThresholdDetection;
     bool isCoroutineStarted;
@@ -19,6 +21,7 @@ public class DetectionBar : MonoBehaviour
     void Awake()
     {
         currentDetection = 100;
+        detectionAmountText.text = currentDetection.ToString();
         detectionTimer = 5;
         thresholdTimer = 10;
 
@@ -67,6 +70,7 @@ public class DetectionBar : MonoBehaviour
         if(currentDetection != 0)
         {
             currentDetection-=1;
+            detectionAmountText.text = currentDetection.ToString();
         }
         isDetectionLowered = false;
     }
